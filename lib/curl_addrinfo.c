@@ -385,7 +385,7 @@ Curl_ip2addr(int af, const void *inaddr, const char *hostname, int port)
 
   DEBUGASSERT(inaddr && hostname);
 
-  buf = malloc(sizeof(struct namebuff));
+  buf = zalloc(struct namebuff, 1);
   if(!buf)
     return NULL;
 

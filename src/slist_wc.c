@@ -44,7 +44,7 @@ struct slist_wc *slist_wc_append(struct slist_wc *list,
     return NULL;
 
   if(!list) {
-    list = malloc(sizeof(struct slist_wc));
+    list = zalloc(struct slist_wc, 1);
 
     if(!list) {
       curl_slist_free_all(new_item);

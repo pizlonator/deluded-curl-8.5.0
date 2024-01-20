@@ -24,6 +24,8 @@
  *
  ***************************************************************************/
 
+#include <stdfil.h>
+
 #if defined(BUILDING_LIBCURL) && !defined(CURL_NO_OLDIES)
 #define CURL_NO_OLDIES
 #endif

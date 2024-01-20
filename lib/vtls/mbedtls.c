@@ -879,7 +879,7 @@ mbed_connect_step3(struct Curl_cfilter *cf, struct Curl_easy *data)
     void *old_ssl_sessionid = NULL;
     bool added = FALSE;
 
-    our_ssl_sessionid = malloc(sizeof(mbedtls_ssl_session));
+    our_ssl_sessionid = zalloc(mbedtls_ssl_session, 1);
     if(!our_ssl_sessionid)
       return CURLE_OUT_OF_MEMORY;
 

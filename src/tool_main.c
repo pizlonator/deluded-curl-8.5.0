@@ -155,7 +155,7 @@ static CURLcode main_init(struct GlobalConfig *config)
   config->parallel_max = PARALLEL_DEFAULT;
 
   /* Allocate the initial operate config */
-  config->first = config->last = malloc(sizeof(struct OperationConfig));
+  config->first = config->last = zalloc(struct OperationConfig, 1);
   if(config->first) {
     /* Perform the libcurl initialization */
     result = curl_global_init(CURL_GLOBAL_DEFAULT);

@@ -234,7 +234,7 @@ int parseconfig(const char *filename, struct GlobalConfig *global)
       if(res == PARAM_NEXT_OPERATION) {
         if(operation->url_list && operation->url_list->url) {
           /* Allocate the next config */
-          operation->next = malloc(sizeof(struct OperationConfig));
+          operation->next = zalloc(struct OperationConfig, 1);
           if(operation->next) {
             /* Initialise the newly created config */
             config_init(operation->next);

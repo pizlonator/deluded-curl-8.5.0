@@ -2732,7 +2732,7 @@ ParameterError parse_args(struct GlobalConfig *global, int argc,
 
           if(config->url_list && config->url_list->url) {
             /* Allocate the next config */
-            config->next = malloc(sizeof(struct OperationConfig));
+            config->next = zalloc(struct OperationConfig, 1);
             if(config->next) {
               /* Initialise the newly created config */
               config_init(config->next);

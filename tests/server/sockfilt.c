@@ -595,7 +595,7 @@ static HANDLE select_ws_wait(HANDLE handle, HANDLE signal, HANDLE abort)
   curl_win_thread_handle_t thread;
 
   /* allocate internal waiting data structure */
-  data = malloc(sizeof(struct select_ws_wait_data));
+  data = zalloc(struct select_ws_wait_data, 1);
   if(data) {
     data->handle = handle;
     data->signal = signal;

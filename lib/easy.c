@@ -503,7 +503,7 @@ static int events_socket(struct Curl_easy *easy,      /* easy handle */
                  __func__, s); */
     }
     else {
-      m = malloc(sizeof(struct socketmonitor));
+      m = zalloc(struct socketmonitor, 1);
       if(m) {
         m->next = ev->list;
         m->socket.fd = s;

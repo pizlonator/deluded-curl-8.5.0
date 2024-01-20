@@ -60,7 +60,7 @@ UNITTEST_START
   int key2 = 25;
 
 
-  value = malloc(sizeof(int));
+  value = zalloc(int, 1);
   abort_unless(value != NULL, "Out of memory");
   *value = 199;
   nodep = Curl_hash_add(&hash_static, &key, klen, value);
@@ -70,7 +70,7 @@ UNITTEST_START
   Curl_hash_clean(&hash_static);
 
   /* Attempt to add another key/value pair */
-  value2 = malloc(sizeof(int));
+  value2 = zalloc(int, 1);
   abort_unless(value2 != NULL, "Out of memory");
   *value2 = 204;
   nodep = Curl_hash_add(&hash_static, &key2, klen, value2);

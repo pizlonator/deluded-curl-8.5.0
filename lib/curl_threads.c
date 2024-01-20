@@ -61,8 +61,8 @@ static void *curl_thread_create_thunk(void *arg)
 
 curl_thread_t Curl_thread_create(unsigned int (*func) (void *), void *arg)
 {
-  curl_thread_t t = malloc(sizeof(pthread_t));
-  struct Curl_actual_call *ac = malloc(sizeof(struct Curl_actual_call));
+  curl_thread_t t = zalloc(pthread_t, 1);
+  struct Curl_actual_call *ac = zalloc(struct Curl_actual_call, 1);
   if(!(ac && t))
     goto err;
 

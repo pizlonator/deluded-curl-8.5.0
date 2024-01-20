@@ -226,7 +226,7 @@ int init_thread_sync_data(struct thread_data *td,
   (void) hints;
 #endif
 
-  tsd->mtx = malloc(sizeof(curl_mutex_t));
+  tsd->mtx = zalloc(curl_mutex_t, 1);
   if(!tsd->mtx)
     goto err_exit;
 
