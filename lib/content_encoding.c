@@ -284,8 +284,6 @@ static CURLcode deflate_do_init(struct Curl_easy *data,
   z_stream *z = &zp->z;     /* zlib state structure */
 
   /* Initialize zlib */
-  z->zalloc = (alloc_func) zalloc_cb;
-  z->zfree = (free_func) zfree_cb;
 
   if(inflateInit(z) != Z_OK)
     return process_zlib_error(data, z);
@@ -341,8 +339,6 @@ static CURLcode gzip_do_init(struct Curl_easy *data,
   z_stream *z = &zp->z;     /* zlib state structure */
 
   /* Initialize zlib */
-  z->zalloc = (alloc_func) zalloc_cb;
-  z->zfree = (free_func) zfree_cb;
 
   if(strcmp(zlibVersion(), "1.2.0.4") >= 0) {
     /* zlib ver. >= 1.2.0.4 supports transparent gzip decompressing */
