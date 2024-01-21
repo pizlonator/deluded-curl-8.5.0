@@ -128,7 +128,7 @@ static CURLcode file_setup_connection(struct Curl_easy *data,
 {
   (void)conn;
   /* allocate the FILE specific struct */
-  data->req.p.file = calloc(1, sizeof(struct FILEPROTO));
+  data->req.p.file = zalloc_zero(struct FILEPROTO, 1);
   if(!data->req.p.file)
     return CURLE_OUT_OF_MEMORY;
 

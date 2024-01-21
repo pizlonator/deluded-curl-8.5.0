@@ -2153,7 +2153,7 @@ static CURLcode myssh_setup_connection(struct Curl_easy *data,
   struct SSHPROTO *ssh;
   struct ssh_conn *sshc = &conn->proto.sshc;
 
-  data->req.p.ssh = ssh = calloc(1, sizeof(struct SSHPROTO));
+  data->req.p.ssh = ssh = zalloc_zero(struct SSHPROTO, 1);
   if(!ssh)
     return CURLE_OUT_OF_MEMORY;
   Curl_dyn_init(&sshc->readdir_buf, PATH_MAX * 2);

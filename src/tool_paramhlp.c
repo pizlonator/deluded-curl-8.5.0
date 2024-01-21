@@ -43,7 +43,7 @@
 
 struct getout *new_getout(struct OperationConfig *config)
 {
-  struct getout *node = calloc(1, sizeof(struct getout));
+  struct getout *node = zalloc_zero(struct getout, 1);
   struct getout *last = config->url_last;
   if(node) {
     static int outnum = 0;

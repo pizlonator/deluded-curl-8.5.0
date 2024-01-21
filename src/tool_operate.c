@@ -211,7 +211,7 @@ static curl_off_t all_pers;
 static CURLcode add_per_transfer(struct per_transfer **per)
 {
   struct per_transfer *p;
-  p = calloc(1, sizeof(struct per_transfer));
+  p = zalloc_zero(struct per_transfer, 1);
   if(!p)
     return CURLE_OUT_OF_MEMORY;
   if(!transfers)

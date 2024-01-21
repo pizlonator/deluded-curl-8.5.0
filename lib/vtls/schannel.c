@@ -730,7 +730,7 @@ schannel_acquire_credential_handle(struct Curl_cfilter *cf,
 
   /* allocate memory for the reusable credential handle */
   backend->cred = (struct Curl_schannel_cred *)
-    calloc(1, sizeof(struct Curl_schannel_cred));
+    zalloc_zero(struct Curl_schannel_cred, 1);
   if(!backend->cred) {
     failf(data, "schannel: unable to allocate memory");
 
@@ -1229,7 +1229,7 @@ schannel_connect_step1(struct Curl_cfilter *cf, struct Curl_easy *data)
 
   /* allocate memory for the security context handle */
   backend->ctxt = (struct Curl_schannel_ctxt *)
-    calloc(1, sizeof(struct Curl_schannel_ctxt));
+    zalloc_zero(struct Curl_schannel_ctxt, 1);
   if(!backend->ctxt) {
     failf(data, "schannel: unable to allocate memory");
     return CURLE_OUT_OF_MEMORY;
@@ -2829,7 +2829,7 @@ bool Curl_schannel_set_cached_cert_store(struct Curl_cfilter *cf,
 
   if(!multi->ssl_backend_data) {
     multi->ssl_backend_data =
-      calloc(1, sizeof(struct schannel_multi_ssl_backend_data));
+      zalloc_zero(struct schannel_multi_ssl_backend_data, 1);
     if(!multi->ssl_backend_data) {
       return false;
     }

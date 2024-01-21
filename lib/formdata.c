@@ -83,7 +83,7 @@ AddHttpPost(char *name, size_t namelength,
   if((bufferlength > LONG_MAX) || (namelength > LONG_MAX))
     /* avoid overflow in typecasts below */
     return NULL;
-  post = calloc(1, sizeof(struct curl_httppost));
+  post = zalloc_zero(struct curl_httppost, 1);
   if(post) {
     post->name = name;
     post->namelength = (long)namelength;
@@ -134,7 +134,7 @@ static struct FormInfo *AddFormInfo(char *value,
                                     struct FormInfo *parent_form_info)
 {
   struct FormInfo *form_info;
-  form_info = calloc(1, sizeof(struct FormInfo));
+  form_info = zalloc_zero(struct FormInfo, 1);
   if(!form_info)
     return NULL;
   if(value)
@@ -224,7 +224,7 @@ CURLFORMcode FormAdd(struct curl_httppost **httppost,
   /*
    * We need to allocate the first struct to fill in.
    */
-  first_form = calloc(1, sizeof(struct FormInfo));
+  first_form = zalloc_zero(struct FormInfo, 1);
   if(!first_form)
     return CURL_FORMADD_MEMORY;
 

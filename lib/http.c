@@ -229,7 +229,7 @@ static CURLcode http_setup_conn(struct Curl_easy *data,
   struct HTTP *http;
   DEBUGASSERT(data->req.p.http == NULL);
 
-  http = calloc(1, sizeof(struct HTTP));
+  http = zalloc_zero(struct HTTP, 1);
   if(!http)
     return CURLE_OUT_OF_MEMORY;
 

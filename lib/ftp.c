@@ -3814,7 +3814,7 @@ static CURLcode init_wc_data(struct Curl_easy *data)
      resources for wildcard transfer */
 
   /* allocate ftp protocol specific wildcard data */
-  ftpwc = calloc(1, sizeof(struct ftp_wc));
+  ftpwc = zalloc_zero(struct ftp_wc, 1);
   if(!ftpwc) {
     result = CURLE_OUT_OF_MEMORY;
     goto fail;
@@ -4379,7 +4379,7 @@ static CURLcode ftp_setup_connection(struct Curl_easy *data,
   CURLcode result = CURLE_OK;
   struct ftp_conn *ftpc = &conn->proto.ftpc;
 
-  ftp = calloc(1, sizeof(struct FTP));
+  ftp = zalloc_zero(struct FTP, 1);
   if(!ftp)
     return CURLE_OUT_OF_MEMORY;
 

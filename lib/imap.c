@@ -1428,7 +1428,7 @@ static CURLcode imap_init(struct Curl_easy *data)
   CURLcode result = CURLE_OK;
   struct IMAP *imap;
 
-  imap = data->req.p.imap = calloc(1, sizeof(struct IMAP));
+  imap = data->req.p.imap = zalloc_zero(struct IMAP, 1);
   if(!imap)
     result = CURLE_OUT_OF_MEMORY;
 

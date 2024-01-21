@@ -779,7 +779,7 @@ static struct Curl_easy *h2_duphandle(struct Curl_cfilter *cf,
   struct Curl_easy *second = curl_easy_duphandle(data);
   if(second) {
     /* setup the request struct */
-    struct HTTP *http = calloc(1, sizeof(struct HTTP));
+    struct HTTP *http = zalloc_zero(struct HTTP, 1);
     if(!http) {
       (void)Curl_close(&second);
     }
