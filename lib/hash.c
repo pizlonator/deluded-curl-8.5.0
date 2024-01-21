@@ -112,7 +112,7 @@ Curl_hash_add(struct Curl_hash *h, void *key, size_t key_len, void *p)
   DEBUGASSERT(h->slots);
   if(!h->table) {
     int i;
-    h->table = malloc(h->slots * sizeof(struct Curl_llist));
+    h->table = zalloc(struct Curl_llist, h->slots);
     if(!h->table)
       return NULL; /* OOM */
     for(i = 0; i < h->slots; ++i)

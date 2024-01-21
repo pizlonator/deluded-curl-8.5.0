@@ -1200,7 +1200,7 @@ static CURLMcode multi_wait(struct Curl_multi *multi,
        big, so at 2^29 sockets this value might wrap. When a process gets
        the capability to actually handle over 500 million sockets this
        calculation needs a integer overflow check. */
-    ufds = malloc(nfds * sizeof(struct pollfd));
+    ufds = zalloc(struct pollfd, nfds);
     if(!ufds)
       return CURLM_OUT_OF_MEMORY;
     ufds_malloc = TRUE;
