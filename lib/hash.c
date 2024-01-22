@@ -80,8 +80,14 @@ static struct Curl_hash_element *
 mk_hash_element(const void *key, size_t key_len, const void *p)
 {
   /* allocate the struct plus memory after it to store the key */
-  struct Curl_hash_element *he = malloc(sizeof(struct Curl_hash_element) +
-                                        key_len);
+  ztype* element_type = zcattype(ztypeof(struct Curl_hash_element),
+                                 sizeof(struct Curl_hash_element),
+                                 zgettypeslice(key, key_len),
+                                 key_len);
+  struct Curl_hash_element *he =
+    zalloc_with_type(element_type,
+                     sizeof(struct Curl_hash_element) +
+                     key_len);
   if(he) {
     /* copy the key */
     memcpy(he->key, key, key_len);
