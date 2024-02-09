@@ -79,15 +79,23 @@ Curl_hash_init(struct Curl_hash *h,
 static struct Curl_hash_element *
 mk_hash_element(const void *key, size_t key_len, const void *p)
 {
+  static const bool verbose = false;
+  
   /* allocate the struct plus memory after it to store the key */
   ztype* element_type = zcattype(ztypeof(struct Curl_hash_element),
-                                 sizeof(struct Curl_hash_element),
-                                 zgettypeslice(key, key_len),
+                                 __builtin_offsetof(struct Curl_hash_element, key),
+                                 zgettype(key),
                                  key_len);
   struct Curl_hash_element *he =
     zalloc_with_type(element_type,
-                     sizeof(struct Curl_hash_element) +
+                     __builtin_offsetof(struct Curl_hash_element, key) +
                      key_len);
+  if (verbose) {
+    zprintf("actual hash element type = %T\n",
+            zslicetype(ztypeof(struct Curl_hash_element),
+                       0, __builtin_offsetof(struct Curl_hash_element, key)));
+    zprintf("key = %P, element_type = %T, he = %P, key_len = %zu\n", key, element_type, he, key_len);
+  }
   if(he) {
     /* copy the key */
     memcpy(he->key, key, key_len);

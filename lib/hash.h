@@ -62,7 +62,8 @@ struct Curl_hash_element {
   struct Curl_llist_element list;
   void   *ptr;
   size_t key_len;
-  char   key[1]; /* allocated memory following the struct */
+  void*  key[1]; /* allocated memory following the struct; the type is a pointer just
+                    to get pointer alignment on this field. */
 };
 
 struct Curl_hash_iterator {
