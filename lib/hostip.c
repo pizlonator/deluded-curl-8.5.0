@@ -492,7 +492,7 @@ Curl_cache_addr(struct Curl_easy *data,
     hostlen = strlen(hostname);
 
   /* Create a new cache entry */
-  dns = calloc(1, sizeof(struct Curl_dns_entry) + hostlen);
+  dns = zalloc_flex_zero(struct Curl_dns_entry, hostname, hostlen + 1);
   if(!dns) {
     return NULL;
   }

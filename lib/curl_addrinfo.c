@@ -145,7 +145,7 @@ Curl_getaddrinfo_ex(const char *nodename,
     if((size_t)ai->ai_addrlen < ss_size)
       continue;
 
-    ca = malloc(sizeof(struct Curl_addrinfo) + ss_size + namelen);
+    ca = zalloc_flex_cat(struct Curl_addrinfo, char, ss_size + namelen);
     if(!ca) {
       error = EAI_MEMORY;
       break;

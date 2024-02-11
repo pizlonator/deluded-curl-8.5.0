@@ -1347,7 +1347,7 @@ static CURLcode cf_setup_create(struct Curl_cfilter **pcf,
   CURLcode result = CURLE_OK;
 
   (void)data;
-  ctx = calloc(1, sizeof(*ctx));
+  ctx = zalloc_zero(typeof(*ctx), 1);
   if(!ctx) {
     result = CURLE_OUT_OF_MEMORY;
     goto out;
