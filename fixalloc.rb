@@ -31,9 +31,13 @@ Dir.glob("**/*.[ch]") {
     #    | match |
     #    "zalloc(struct #{$2}, #{$1})"
     #}
-    contents.gsub!(/calloc\(1, sizeof\(*([a-zA-Z0-9_]+)\)\)/) {
+    #contents.gsub!(/calloc\(1, sizeof\(\*([a-zA-Z0-9_]+)\)\)/) {
+    #    | match |
+    #    "zalloc_zero(typeof(*#{$1}), 1)"
+    #}
+    contents.gsub!(/calloc\(1, sizeof\(([a-zA-Z0-9_]+)\)\)/) {
         | match |
-        "zalloc_zero(typeof(*#{$1}), 1)"
+        "zalloc_zero(typeof(#{$1}), 1)"
     }
     IO::write(filename, contents)
 }

@@ -458,7 +458,7 @@ static struct ssl_connect_data *cf_ctx_new(struct Curl_easy *data,
   struct ssl_connect_data *ctx;
 
   (void)data;
-  ctx = calloc(1, sizeof(*ctx));
+  ctx = zalloc_zero(typeof(*ctx), 1);
   if(!ctx)
     return NULL;
 

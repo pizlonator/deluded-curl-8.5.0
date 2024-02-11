@@ -185,7 +185,7 @@ static CURLcode cf_test_create(struct Curl_cfilter **pcf,
 
   (void)data;
   (void)conn;
-  ctx = calloc(1, sizeof(*ctx));
+  ctx = zalloc_zero(typeof(*ctx), 1);
   if(!ctx) {
     result = CURLE_OUT_OF_MEMORY;
     goto out;

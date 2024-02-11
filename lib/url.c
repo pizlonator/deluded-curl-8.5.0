@@ -4000,7 +4000,7 @@ CURLcode Curl_data_priority_add_child(struct Curl_easy *parent,
     struct Curl_data_prio_node **tail;
     struct Curl_data_prio_node *pnode;
 
-    pnode = calloc(1, sizeof(*pnode));
+    pnode = zalloc_zero(typeof(*pnode), 1);
     if(!pnode)
       return CURLE_OUT_OF_MEMORY;
     pnode->data = child;

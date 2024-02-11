@@ -135,7 +135,7 @@ CURLcode Curl_auth_create_ntlm_type1_message(struct Curl_easy *data,
     ntlm->p_identity = NULL;
 
   /* Allocate our credentials handle */
-  ntlm->credentials = calloc(1, sizeof(CredHandle));
+  ntlm->credentials = zalloc_zero(typeof(CredHandle), 1);
   if(!ntlm->credentials)
     return CURLE_OUT_OF_MEMORY;
 
@@ -149,7 +149,7 @@ CURLcode Curl_auth_create_ntlm_type1_message(struct Curl_easy *data,
     return CURLE_LOGIN_DENIED;
 
   /* Allocate our new context handle */
-  ntlm->context = calloc(1, sizeof(CtxtHandle));
+  ntlm->context = zalloc_zero(typeof(CtxtHandle), 1);
   if(!ntlm->context)
     return CURLE_OUT_OF_MEMORY;
 

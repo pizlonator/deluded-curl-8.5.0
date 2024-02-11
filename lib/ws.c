@@ -612,7 +612,7 @@ CURLcode Curl_ws_accept(struct Curl_easy *data,
   DEBUGASSERT(data->conn);
   ws = data->conn->proto.ws;
   if(!ws) {
-    ws = calloc(1, sizeof(*ws));
+    ws = zalloc_zero(typeof(*ws), 1);
     if(!ws)
       return CURLE_OUT_OF_MEMORY;
     data->conn->proto.ws = ws;

@@ -246,7 +246,7 @@ static CURLcode http2_data_setup(struct Curl_cfilter *cf,
     return CURLE_OK;
   }
 
-  stream = calloc(1, sizeof(*stream));
+  stream = zalloc_zero(typeof(*stream), 1);
   if(!stream)
     return CURLE_OUT_OF_MEMORY;
 
@@ -2602,7 +2602,7 @@ static CURLcode http2_cfilter_add(struct Curl_cfilter **pcf,
   CURLcode result = CURLE_OUT_OF_MEMORY;
 
   DEBUGASSERT(data->conn);
-  ctx = calloc(1, sizeof(*ctx));
+  ctx = zalloc_zero(typeof(*ctx), 1);
   if(!ctx)
     goto out;
 
@@ -2628,7 +2628,7 @@ static CURLcode http2_cfilter_insert_after(struct Curl_cfilter *cf,
   CURLcode result = CURLE_OUT_OF_MEMORY;
 
   (void)data;
-  ctx = calloc(1, sizeof(*ctx));
+  ctx = zalloc_zero(typeof(*ctx), 1);
   if(!ctx)
     goto out;
 

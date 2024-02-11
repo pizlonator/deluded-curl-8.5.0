@@ -317,7 +317,7 @@ CURLcode Curl_cf_http_proxy_insert_after(struct Curl_cfilter *cf_at,
   CURLcode result;
 
   (void)data;
-  ctx = calloc(1, sizeof(*ctx));
+  ctx = zalloc_zero(typeof(*ctx), 1);
   if(!ctx) {
     result = CURLE_OUT_OF_MEMORY;
     goto out;

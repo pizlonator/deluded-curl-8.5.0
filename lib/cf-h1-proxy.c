@@ -125,7 +125,7 @@ static CURLcode tunnel_init(struct Curl_cfilter *cf,
   if(result)
     return result;
 
-  ts = calloc(1, sizeof(*ts));
+  ts = zalloc_zero(typeof(*ts), 1);
   if(!ts)
     return CURLE_OUT_OF_MEMORY;
 

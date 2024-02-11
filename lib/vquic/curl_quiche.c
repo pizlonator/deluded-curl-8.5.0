@@ -290,7 +290,7 @@ static CURLcode h3_data_setup(struct Curl_cfilter *cf,
   if(stream)
     return CURLE_OK;
 
-  stream = calloc(1, sizeof(*stream));
+  stream = zalloc_zero(typeof(*stream), 1);
   if(!stream)
     return CURLE_OUT_OF_MEMORY;
 
@@ -1668,7 +1668,7 @@ CURLcode Curl_cf_quiche_create(struct Curl_cfilter **pcf,
 
   (void)data;
   (void)conn;
-  ctx = calloc(1, sizeof(*ctx));
+  ctx = zalloc_zero(typeof(*ctx), 1);
   if(!ctx) {
     result = CURLE_OUT_OF_MEMORY;
     goto out;

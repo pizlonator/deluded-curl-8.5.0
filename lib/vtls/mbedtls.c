@@ -791,7 +791,7 @@ mbed_connect_step2(struct Curl_cfilter *cf, struct Curl_easy *data)
       return CURLE_SSL_PINNEDPUBKEYNOTMATCH;
     }
 
-    p = calloc(1, sizeof(*p));
+    p = zalloc_zero(typeof(*p), 1);
 
     if(!p)
       return CURLE_OUT_OF_MEMORY;

@@ -572,7 +572,7 @@ CURLcode Curl_auth_create_digest_http_message(struct Curl_easy *data,
     }
 
     /* Allocate our new context handle */
-    digest->http_context = calloc(1, sizeof(CtxtHandle));
+    digest->http_context = zalloc_zero(typeof(CtxtHandle), 1);
     if(!digest->http_context)
       return CURLE_OUT_OF_MEMORY;
 
