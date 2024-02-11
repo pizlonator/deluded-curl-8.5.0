@@ -354,7 +354,7 @@ CC = xcrun /Users/pizlo/Programs/llvm-project-deluge/curl-8.5.0/../build/bin/cla
 CCDEPMODE = depmode=gcc3
 CFLAGS = -Qunused-arguments -O2 -Wno-pointer-bool-conversion -Werror=partial-availability
 CFLAG_CURL_SYMBOL_HIDING = -fvisibility=hidden
-CONFIGURE_OPTIONS = " '--with-openssl' 'CC=xcrun /Users/pizlo/Programs/llvm-project-deluge/curl-8.5.0/../build/bin/clang -g -O'"
+CONFIGURE_OPTIONS = " '--with-openssl' '--prefix=/Users/pizlo/Programs/llvm-project-deluge/curl-8.5.0/../pizfix' 'CC=xcrun /Users/pizlo/Programs/llvm-project-deluge/curl-8.5.0/../build/bin/clang -g -O'"
 CPP = xcrun /Users/pizlo/Programs/llvm-project-deluge/curl-8.5.0/../build/bin/clang -g -O -E
 CPPFLAGS = 
 CPPFLAG_CURL_STATICLIB = 
@@ -544,7 +544,7 @@ mandir = ${datarootdir}/man
 mkdir_p = $(MKDIR_P)
 oldincludedir = /usr/include
 pdfdir = ${docdir}
-prefix = /usr/local
+prefix = /Users/pizlo/Programs/llvm-project-deluge/curl-8.5.0/../pizfix
 program_transform_name = s,x,x,
 psdir = ${docdir}
 runstatedir = ${localstatedir}/run

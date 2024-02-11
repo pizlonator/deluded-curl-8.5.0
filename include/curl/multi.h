@@ -101,7 +101,7 @@ typedef enum {
 struct CURLMsg {
   CURLMSG msg;       /* what this message means */
   CURL *easy_handle; /* the handle it concerns */
-  union {
+  struct {
     void *whatever;    /* message-specific data */
     CURLcode result;   /* return code for transfer */
   } data;
