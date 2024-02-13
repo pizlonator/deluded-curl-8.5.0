@@ -312,7 +312,7 @@ CURLcode Curl_headers_push(struct Curl_easy *data, const char *header,
     }
   }
 
-  hs = calloc(1, sizeof(*hs) + hlen);
+  hs = zalloc_flex_zero(typeof(*hs), buffer, hlen + 1);
   if(!hs)
     return CURLE_OUT_OF_MEMORY;
   memcpy(hs->buffer, header, hlen);

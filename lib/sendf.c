@@ -517,13 +517,15 @@ static CURLcode cw_client_write(struct Curl_easy *data,
   return chop_write(data, type, FALSE, (char *)buf, nbytes);
 }
 
+static const struct Curl_cwriter cw_prototype;
+
 static const struct Curl_cwtype cw_client = {
   "client",
   NULL,
   Curl_cwriter_def_init,
   cw_client_write,
   Curl_cwriter_def_close,
-  sizeof(struct Curl_cwriter)
+  &cw_prototype
 };
 
 static size_t get_max_body_write_len(struct Curl_easy *data, curl_off_t limit)
@@ -642,7 +644,7 @@ static const struct Curl_cwtype cw_download = {
   Curl_cwriter_def_init,
   cw_download_write,
   Curl_cwriter_def_close,
-  sizeof(struct Curl_cwriter)
+  &cw_prototype
 };
 
 /* RAW client writer in phase CURL_CW_RAW that
@@ -663,7 +665,7 @@ static const struct Curl_cwtype cw_raw = {
   Curl_cwriter_def_init,
   cw_raw_write,
   Curl_cwriter_def_close,
-  sizeof(struct Curl_cwriter)
+  &cw_prototype
 };
 
 /* Create an unencoding writer stage using the given handler. */
@@ -675,8 +677,8 @@ CURLcode Curl_cwriter_create(struct Curl_cwriter **pwriter,
   struct Curl_cwriter *writer;
   CURLcode result = CURLE_OUT_OF_MEMORY;
 
-  DEBUGASSERT(cwt->cwriter_size >= sizeof(struct Curl_cwriter));
-  writer = (struct Curl_cwriter *) calloc(1, cwt->cwriter_size);
+  DEBUGASSERT(zlength((char*)cwt->cwriter_prototype) >= sizeof(struct Curl_cwriter));
+  writer = (struct Curl_cwriter *) zalloc_clone_zero(cwt->cwriter_prototype);
   if(!writer)
     goto out;
 

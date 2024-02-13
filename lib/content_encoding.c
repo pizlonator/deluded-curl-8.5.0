@@ -321,13 +321,15 @@ static void deflate_do_close(struct Curl_easy *data,
   exit_zlib(data, z, &zp->zlib_init, CURLE_OK);
 }
 
+static const struct zlib_writer zlib_writer_prototype;
+
 static const struct Curl_cwtype deflate_encoding = {
   "deflate",
   NULL,
   deflate_do_init,
   deflate_do_write,
   deflate_do_close,
-  sizeof(struct zlib_writer)
+  &zlib_writer_prototype
 };
 
 
@@ -589,7 +591,7 @@ static const struct Curl_cwtype gzip_encoding = {
   gzip_do_init,
   gzip_do_write,
   gzip_do_close,
-  sizeof(struct zlib_writer)
+  &zlib_writer_prototype
 };
 
 #endif /* HAVE_LIBZ */
@@ -714,13 +716,15 @@ static void brotli_do_close(struct Curl_easy *data,
   }
 }
 
+static const struct brotli_writer brotli_writer_prototype;
+
 static const struct Curl_cwtype brotli_encoding = {
   "br",
   NULL,
   brotli_do_init,
   brotli_do_write,
   brotli_do_close,
-  sizeof(struct brotli_writer)
+  &brotli_writer_prototype
 };
 #endif
 
@@ -806,16 +810,19 @@ static void zstd_do_close(struct Curl_easy *data,
   }
 }
 
+static const struct zstd_writer zstd_writer_prototype;
+
 static const struct Curl_cwtype zstd_encoding = {
   "zstd",
   NULL,
   zstd_do_init,
   zstd_do_write,
   zstd_do_close,
-  sizeof(struct zstd_writer)
+  &zstd_writer_prototype
 };
 #endif
 
+static const struct Curl_cwriter cw_prototype;
 
 /* Identity handler. */
 static const struct Curl_cwtype identity_encoding = {
@@ -824,7 +831,7 @@ static const struct Curl_cwtype identity_encoding = {
   Curl_cwriter_def_init,
   Curl_cwriter_def_write,
   Curl_cwriter_def_close,
-  sizeof(struct Curl_cwriter)
+  &cw_prototype
 };
 
 
@@ -923,7 +930,7 @@ static const struct Curl_cwtype error_writer = {
   error_do_init,
   error_do_write,
   error_do_close,
-  sizeof(struct Curl_cwriter)
+  &cw_prototype
 };
 
 /* Find the content encoding by name. */

@@ -814,7 +814,7 @@ CURLcode Curl_ssl_initsessions(struct Curl_easy *data, size_t amount)
     /* this is just a precaution to prevent multiple inits */
     return CURLE_OK;
 
-  session = calloc(amount, sizeof(struct Curl_ssl_session));
+  session = zalloc_zero(struct Curl_ssl_session, amount);
   if(!session)
     return CURLE_OUT_OF_MEMORY;
 
