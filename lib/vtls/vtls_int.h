@@ -93,7 +93,7 @@ struct Curl_ssl {
    */
   curl_ssl_backend info;
   unsigned int supports; /* bitfield, see above */
-  size_t sizeof_ssl_backend_data;
+  const void* ssl_backend_data_prototype;
 
   int (*init)(void);
   void (*cleanup)(void);

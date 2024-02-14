@@ -463,7 +463,7 @@ static struct ssl_connect_data *cf_ctx_new(struct Curl_easy *data,
     return NULL;
 
   ctx->alpn = alpn;
-  ctx->backend = calloc(1, Curl_ssl->sizeof_ssl_backend_data);
+  ctx->backend = zalloc_clone_zero(Curl_ssl->ssl_backend_data_prototype);
   if(!ctx->backend) {
     free(ctx);
     return NULL;
@@ -1311,7 +1311,7 @@ static ssize_t multissl_send_plain(struct Curl_cfilter *cf,
 static const struct Curl_ssl Curl_ssl_multi = {
   { CURLSSLBACKEND_NONE, "multi" },  /* info */
   0, /* supports nothing */
-  (size_t)-1, /* something insanely large to be on the safe side */
+  NULL, /* can't be allocated (zalloc_with_type will deluge panic) */
 
   multissl_init,                     /* init */
   Curl_none_cleanup,                 /* cleanup */

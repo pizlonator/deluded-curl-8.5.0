@@ -4887,6 +4887,8 @@ static void ossl_free_multi_ssl_backend_data(
 #endif /* HAVE_SSL_X509_STORE_SHARE */
 }
 
+static const struct ossl_ssl_backend_data ossl_ssl_backend_data_prototype;
+
 const struct Curl_ssl Curl_ssl_openssl = {
   { CURLSSLBACKEND_OPENSSL, "openssl" }, /* info */
 
@@ -4900,7 +4902,7 @@ const struct Curl_ssl Curl_ssl_openssl = {
 #endif
   SSLSUPP_HTTPS_PROXY,
 
-  sizeof(struct ossl_ssl_backend_data),
+  &ossl_ssl_backend_data_prototype,
 
   ossl_init,                /* init */
   ossl_cleanup,             /* cleanup */
