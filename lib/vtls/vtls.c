@@ -463,7 +463,7 @@ static struct ssl_connect_data *cf_ctx_new(struct Curl_easy *data,
     return NULL;
 
   ctx->alpn = alpn;
-  ctx->backend = zalloc_clone(Curl_ssl->ssl_backend_data_prototype);
+  ctx->backend = zalloc_like(Curl_ssl->ssl_backend_data_prototype);
   if(!ctx->backend) {
     free(ctx);
     return NULL;
