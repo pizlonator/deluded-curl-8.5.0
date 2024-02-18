@@ -3173,7 +3173,7 @@ static CURLcode ssh_setup_connection(struct Curl_easy *data,
   struct SSHPROTO *ssh;
   (void)conn;
 
-  data->req.p.ssh = ssh = zalloc_zero(struct SSHPROTO, 1);
+  data->req.p.ssh = ssh = zalloc(struct SSHPROTO, 1);
   if(!ssh)
     return CURLE_OUT_OF_MEMORY;
 

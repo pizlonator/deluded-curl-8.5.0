@@ -1350,7 +1350,7 @@ static CURLUcode parseurl_and_replace(const char *url, CURLU *u,
  */
 CURLU *curl_url(void)
 {
-  return zalloc_zero(struct Curl_URL, 1);
+  return zalloc(struct Curl_URL, 1);
 }
 
 void curl_url_cleanup(CURLU *u)
@@ -1372,7 +1372,7 @@ void curl_url_cleanup(CURLU *u)
 
 CURLU *curl_url_dup(const CURLU *in)
 {
-  struct Curl_URL *u = zalloc_zero(struct Curl_URL, 1);
+  struct Curl_URL *u = zalloc(struct Curl_URL, 1);
   if(u) {
     DUP(u, in, scheme);
     DUP(u, in, user);

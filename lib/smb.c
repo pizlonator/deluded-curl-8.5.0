@@ -431,7 +431,7 @@ static CURLcode smb_setup_connection(struct Curl_easy *data,
   struct smb_request *req;
 
   /* Initialize the request state */
-  data->req.p.smb = req = zalloc_zero(struct smb_request, 1);
+  data->req.p.smb = req = zalloc(struct smb_request, 1);
   if(!req)
     return CURLE_OUT_OF_MEMORY;
 

@@ -529,7 +529,7 @@ static CURLcode oldap_connect(struct Curl_easy *data, bool *done)
   (void)done;
 
   DEBUGASSERT(!conn->proto.ldapc);
-  li = zalloc_zero(struct ldapconninfo, 1);
+  li = zalloc(struct ldapconninfo, 1);
   if(!li)
     return CURLE_OUT_OF_MEMORY;
   else {
@@ -901,7 +901,7 @@ static CURLcode oldap_do(struct Curl_easy *data, bool *done)
       result = CURLE_LDAP_SEARCH_FAILED;
     }
     else {
-      lr = zalloc_zero(struct ldapreqinfo, 1);
+      lr = zalloc(struct ldapreqinfo, 1);
       if(!lr) {
         ldap_abandon_ext(li->ld, msgid, NULL, NULL);
         result = CURLE_OUT_OF_MEMORY;

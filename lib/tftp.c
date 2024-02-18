@@ -971,7 +971,7 @@ static CURLcode tftp_connect(struct Curl_easy *data, bool *done)
 
   blksize = TFTP_BLKSIZE_DEFAULT;
 
-  state = conn->proto.tftpc = zalloc_zero(struct tftp_state_data, 1);
+  state = conn->proto.tftpc = zalloc(struct tftp_state_data, 1);
   if(!state)
     return CURLE_OUT_OF_MEMORY;
 

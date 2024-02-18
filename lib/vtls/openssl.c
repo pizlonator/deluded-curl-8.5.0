@@ -3373,7 +3373,7 @@ static void set_cached_x509_store(struct Curl_cfilter *cf,
     return;
 
   if(!multi->ssl_backend_data) {
-    multi->ssl_backend_data = zalloc_zero(struct multi_ssl_backend_data, 1);
+    multi->ssl_backend_data = zalloc(struct multi_ssl_backend_data, 1);
     if(!multi->ssl_backend_data)
       return;
   }

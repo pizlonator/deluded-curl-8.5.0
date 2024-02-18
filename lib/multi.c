@@ -283,7 +283,7 @@ static struct Curl_sh_entry *sh_addentry(struct Curl_hash *sh,
   }
 
   /* not present, add it */
-  check = zalloc_zero(struct Curl_sh_entry, 1);
+  check = zalloc(struct Curl_sh_entry, 1);
   if(!check)
     return NULL; /* major failure */
 
@@ -377,7 +377,7 @@ struct Curl_multi *Curl_multi_handle(int hashsize, /* socket hash */
                                      int chashsize, /* connection hash */
                                      int dnssize) /* dns hash */
 {
-  struct Curl_multi *multi = zalloc_zero(struct Curl_multi, 1);
+  struct Curl_multi *multi = zalloc(struct Curl_multi, 1);
 
   if(!multi)
     return NULL;

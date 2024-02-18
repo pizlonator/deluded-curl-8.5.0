@@ -466,7 +466,7 @@ CURLcode glob_url(struct URLGlob **glob, char *url, curl_off_t *urlnum,
     return CURLE_OUT_OF_MEMORY;
   glob_buffer[0] = 0;
 
-  glob_expand = zalloc_zero(struct URLGlob, 1);
+  glob_expand = zalloc(struct URLGlob, 1);
   if(!glob_expand) {
     Curl_safefree(glob_buffer);
     return CURLE_OUT_OF_MEMORY;

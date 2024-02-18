@@ -101,7 +101,7 @@ void Curl_resolver_global_cleanup(void)
 CURLcode Curl_resolver_init(struct Curl_easy *easy, void **resolver)
 {
   (void)easy;
-  *resolver = zalloc_zero(struct resdata, 1);
+  *resolver = zalloc(struct resdata, 1);
   if(!*resolver)
     return CURLE_OUT_OF_MEMORY;
   return CURLE_OK;
@@ -426,7 +426,7 @@ static bool init_resolve_thread(struct Curl_easy *data,
                                 const char *hostname, int port,
                                 const struct addrinfo *hints)
 {
-  struct thread_data *td = zalloc_zero(struct thread_data, 1);
+  struct thread_data *td = zalloc(struct thread_data, 1);
   int err = ENOMEM;
   struct Curl_async *asp = &data->conn->resolve_async;
 

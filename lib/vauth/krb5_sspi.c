@@ -153,7 +153,7 @@ CURLcode Curl_auth_create_gssapi_user_message(struct Curl_easy *data,
       krb5->p_identity = NULL;
 
     /* Allocate our credentials handle */
-    krb5->credentials = zalloc_zero(typeof(CredHandle), 1);
+    krb5->credentials = zalloc(typeof(CredHandle), 1);
     if(!krb5->credentials)
       return CURLE_OUT_OF_MEMORY;
 
@@ -168,7 +168,7 @@ CURLcode Curl_auth_create_gssapi_user_message(struct Curl_easy *data,
       return CURLE_LOGIN_DENIED;
 
     /* Allocate our new context handle */
-    krb5->context = zalloc_zero(typeof(CtxtHandle), 1);
+    krb5->context = zalloc(typeof(CtxtHandle), 1);
     if(!krb5->context)
       return CURLE_OUT_OF_MEMORY;
   }

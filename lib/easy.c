@@ -887,7 +887,7 @@ static CURLcode dupset(struct Curl_easy *dst, struct Curl_easy *src)
  */
 struct Curl_easy *curl_easy_duphandle(struct Curl_easy *data)
 {
-  struct Curl_easy *outcurl = zalloc_zero(struct Curl_easy, 1);
+  struct Curl_easy *outcurl = zalloc(struct Curl_easy, 1);
   if(!outcurl)
     goto fail;
 

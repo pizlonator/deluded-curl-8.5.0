@@ -505,7 +505,7 @@ CURLcode Curl_open(struct Curl_easy **curl)
   struct Curl_easy *data;
 
   /* Very simple start-up: alloc the struct, init it with zeroes and return */
-  data = zalloc_zero(struct Curl_easy, 1);
+  data = zalloc(struct Curl_easy, 1);
   if(!data) {
     /* this is a very serious error */
     DEBUGF(fprintf(stderr, "Error: calloc of Curl_easy failed\n"));
@@ -1338,7 +1338,7 @@ void Curl_verboseconnect(struct Curl_easy *data,
  */
 static struct connectdata *allocate_conn(struct Curl_easy *data)
 {
-  struct connectdata *conn = zalloc_zero(struct connectdata, 1);
+  struct connectdata *conn = zalloc(struct connectdata, 1);
   if(!conn)
     return NULL;
 
@@ -3162,7 +3162,7 @@ static CURLcode resolve_unix(struct Curl_easy *data,
   /* Unix domain sockets are local. The host gets ignored, just use the
    * specified domain socket address. Do not cache "DNS entries". There is
    * no DNS involved and we already have the filesystem path available. */
-  hostaddr = zalloc_zero(struct Curl_dns_entry, 1);
+  hostaddr = zalloc(struct Curl_dns_entry, 1);
   if(!hostaddr)
     return CURLE_OUT_OF_MEMORY;
 
@@ -4000,7 +4000,7 @@ CURLcode Curl_data_priority_add_child(struct Curl_easy *parent,
     struct Curl_data_prio_node **tail;
     struct Curl_data_prio_node *pnode;
 
-    pnode = zalloc_zero(typeof(*pnode), 1);
+    pnode = zalloc(typeof(*pnode), 1);
     if(!pnode)
       return CURLE_OUT_OF_MEMORY;
     pnode->data = child;

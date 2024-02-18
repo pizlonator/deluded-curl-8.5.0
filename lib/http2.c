@@ -246,7 +246,7 @@ static CURLcode http2_data_setup(struct Curl_cfilter *cf,
     return CURLE_OK;
   }
 
-  stream = zalloc_zero(typeof(*stream), 1);
+  stream = zalloc(typeof(*stream), 1);
   if(!stream)
     return CURLE_OUT_OF_MEMORY;
 
@@ -779,7 +779,7 @@ static struct Curl_easy *h2_duphandle(struct Curl_cfilter *cf,
   struct Curl_easy *second = curl_easy_duphandle(data);
   if(second) {
     /* setup the request struct */
-    struct HTTP *http = zalloc_zero(struct HTTP, 1);
+    struct HTTP *http = zalloc(struct HTTP, 1);
     if(!http) {
       (void)Curl_close(&second);
     }
@@ -2602,7 +2602,7 @@ static CURLcode http2_cfilter_add(struct Curl_cfilter **pcf,
   CURLcode result = CURLE_OUT_OF_MEMORY;
 
   DEBUGASSERT(data->conn);
-  ctx = zalloc_zero(typeof(*ctx), 1);
+  ctx = zalloc(typeof(*ctx), 1);
   if(!ctx)
     goto out;
 
@@ -2628,7 +2628,7 @@ static CURLcode http2_cfilter_insert_after(struct Curl_cfilter *cf,
   CURLcode result = CURLE_OUT_OF_MEMORY;
 
   (void)data;
-  ctx = zalloc_zero(typeof(*ctx), 1);
+  ctx = zalloc(typeof(*ctx), 1);
   if(!ctx)
     goto out;
 

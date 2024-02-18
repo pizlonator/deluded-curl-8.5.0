@@ -405,7 +405,7 @@ static CURLcode eyeballer_new(struct eyeballer **pballer,
   struct eyeballer *baller;
 
   *pballer = NULL;
-  baller = zalloc_flex_cat_zero(typeof(*baller), char, 1000); /* ??? why 1000? */
+  baller = zalloc_flex_cat(typeof(*baller), char, 1000); /* ??? why 1000? */
   if(!baller)
     return CURLE_OUT_OF_MEMORY;
 
@@ -1096,7 +1096,7 @@ cf_happy_eyeballs_create(struct Curl_cfilter **pcf,
   (void)data;
   (void)conn;
   *pcf = NULL;
-  ctx = zalloc_zero(typeof(*ctx), 1);
+  ctx = zalloc(typeof(*ctx), 1);
   if(!ctx) {
     result = CURLE_OUT_OF_MEMORY;
     goto out;
@@ -1347,7 +1347,7 @@ static CURLcode cf_setup_create(struct Curl_cfilter **pcf,
   CURLcode result = CURLE_OK;
 
   (void)data;
-  ctx = zalloc_zero(typeof(*ctx), 1);
+  ctx = zalloc(typeof(*ctx), 1);
   if(!ctx) {
     result = CURLE_OUT_OF_MEMORY;
     goto out;

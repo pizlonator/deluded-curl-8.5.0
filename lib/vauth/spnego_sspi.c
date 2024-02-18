@@ -163,7 +163,7 @@ CURLcode Curl_auth_decode_spnego_message(struct Curl_easy *data,
       nego->p_identity = NULL;
 
     /* Allocate our credentials handle */
-    nego->credentials = zalloc_zero(typeof(CredHandle), 1);
+    nego->credentials = zalloc(typeof(CredHandle), 1);
     if(!nego->credentials)
       return CURLE_OUT_OF_MEMORY;
 
@@ -178,7 +178,7 @@ CURLcode Curl_auth_decode_spnego_message(struct Curl_easy *data,
       return CURLE_AUTH_ERROR;
 
     /* Allocate our new context handle */
-    nego->context = zalloc_zero(typeof(CtxtHandle), 1);
+    nego->context = zalloc(typeof(CtxtHandle), 1);
     if(!nego->context)
       return CURLE_OUT_OF_MEMORY;
   }

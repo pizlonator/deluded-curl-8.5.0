@@ -382,7 +382,7 @@ struct Curl_addrinfo *Curl_doh(struct Curl_easy *data,
   DEBUGASSERT(conn);
 
   /* start clean, consider allocating this struct on demand */
-  dohp = data->req.doh = zalloc_zero(struct dohdata, 1);
+  dohp = data->req.doh = zalloc(struct dohdata, 1);
   if(!dohp)
     return NULL;
 

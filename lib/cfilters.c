@@ -215,7 +215,7 @@ CURLcode Curl_cf_create(struct Curl_cfilter **pcf,
   CURLcode result = CURLE_OUT_OF_MEMORY;
 
   DEBUGASSERT(cft);
-  cf = zalloc_zero(typeof(*cf), 1);
+  cf = zalloc(typeof(*cf), 1);
   if(!cf)
     goto out;
 

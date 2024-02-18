@@ -132,7 +132,7 @@ static CURLcode rtsp_setup_connection(struct Curl_easy *data,
   struct RTSP *rtsp;
   (void)conn;
 
-  data->req.p.rtsp = rtsp = zalloc_zero(struct RTSP, 1);
+  data->req.p.rtsp = rtsp = zalloc(struct RTSP, 1);
   if(!rtsp)
     return CURLE_OUT_OF_MEMORY;
 

@@ -1395,7 +1395,7 @@ CURLcode Curl_pretransfer(struct Curl_easy *data)
     if(data->state.wildcardmatch) {
       struct WildcardData *wc;
       if(!data->wildcard) {
-        data->wildcard = zalloc_zero(struct WildcardData, 1);
+        data->wildcard = zalloc(struct WildcardData, 1);
         if(!data->wildcard)
           return CURLE_OUT_OF_MEMORY;
       }

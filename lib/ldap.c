@@ -1060,7 +1060,7 @@ static int _ldap_url_parse(struct Curl_easy *data,
                            const struct connectdata *conn,
                            LDAPURLDesc **ludpp)
 {
-  LDAPURLDesc *ludp = zalloc_zero(typeof(*ludp), 1);
+  LDAPURLDesc *ludp = zalloc(typeof(*ludp), 1);
   int rc;
 
   *ludpp = NULL;

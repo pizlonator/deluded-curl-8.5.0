@@ -32,7 +32,7 @@
 
 struct fileinfo *Curl_fileinfo_alloc(void)
 {
-  return zalloc_zero(struct fileinfo, 1);
+  return zalloc(struct fileinfo, 1);
 }
 
 void Curl_fileinfo_cleanup(struct fileinfo *finfo)

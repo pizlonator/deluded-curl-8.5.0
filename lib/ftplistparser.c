@@ -217,7 +217,7 @@ void Curl_wildcard_dtor(struct WildcardData **wcp)
 
 struct ftp_parselist_data *Curl_ftp_parselist_data_alloc(void)
 {
-  return zalloc_zero(struct ftp_parselist_data, 1);
+  return zalloc(struct ftp_parselist_data, 1);
 }
 
 

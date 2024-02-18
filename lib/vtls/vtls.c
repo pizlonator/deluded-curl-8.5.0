@@ -458,12 +458,12 @@ static struct ssl_connect_data *cf_ctx_new(struct Curl_easy *data,
   struct ssl_connect_data *ctx;
 
   (void)data;
-  ctx = zalloc_zero(typeof(*ctx), 1);
+  ctx = zalloc(typeof(*ctx), 1);
   if(!ctx)
     return NULL;
 
   ctx->alpn = alpn;
-  ctx->backend = zalloc_clone_zero(Curl_ssl->ssl_backend_data_prototype);
+  ctx->backend = zalloc_clone(Curl_ssl->ssl_backend_data_prototype);
   if(!ctx->backend) {
     free(ctx);
     return NULL;
@@ -814,7 +814,7 @@ CURLcode Curl_ssl_initsessions(struct Curl_easy *data, size_t amount)
     /* this is just a precaution to prevent multiple inits */
     return CURLE_OK;
 
-  session = zalloc_zero(struct Curl_ssl_session, amount);
+  session = zalloc(struct Curl_ssl_session, amount);
   if(!session)
     return CURLE_OUT_OF_MEMORY;
 

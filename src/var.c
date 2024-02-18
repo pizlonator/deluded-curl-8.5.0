@@ -358,7 +358,7 @@ static ParameterError addvariable(struct GlobalConfig *global,
   if(check)
     notef(global, "Overwriting variable '%s'", check->name);
 
-  p = zalloc_zero(struct var, 1);
+  p = zalloc(struct var, 1);
   if(!p)
     return PARAM_NO_MEM;
 

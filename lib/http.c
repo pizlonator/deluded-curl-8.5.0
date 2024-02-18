@@ -229,7 +229,7 @@ static CURLcode http_setup_conn(struct Curl_easy *data,
   struct HTTP *http;
   DEBUGASSERT(data->req.p.http == NULL);
 
-  http = zalloc_zero(struct HTTP, 1);
+  http = zalloc(struct HTTP, 1);
   if(!http)
     return CURLE_OUT_OF_MEMORY;
 
@@ -2433,7 +2433,7 @@ CURLcode Curl_http_body(struct Curl_easy *data, struct connectdata *conn,
     /* Convert the form structure into a mime structure, then keep
        the conversion */
     if(!data->state.formp) {
-      data->state.formp = zalloc_zero(typeof(curl_mimepart), 1);
+      data->state.formp = zalloc(typeof(curl_mimepart), 1);
       if(!data->state.formp)
         return CURLE_OUT_OF_MEMORY;
       Curl_mime_cleanpart(data->state.formp);
@@ -4620,7 +4620,7 @@ CURLcode Curl_http_req_make(struct httpreq **preq,
   if(m_len + 1 >= sizeof(req->method))
     return CURLE_BAD_FUNCTION_ARGUMENT;
 
-  req = zalloc_zero(typeof(*req), 1);
+  req = zalloc(typeof(*req), 1);
   if(!req)
     goto out;
   memcpy(req->method, method, m_len);
@@ -4776,7 +4776,7 @@ CURLcode Curl_http_req_make2(struct httpreq **preq,
   if(m_len + 1 >= sizeof(req->method))
     return CURLE_BAD_FUNCTION_ARGUMENT;
 
-  req = zalloc_zero(typeof(*req), 1);
+  req = zalloc(typeof(*req), 1);
   if(!req)
     goto out;
   memcpy(req->method, method, m_len);
@@ -4918,7 +4918,7 @@ CURLcode Curl_http_resp_make(struct http_resp **presp,
   struct http_resp *resp;
   CURLcode result = CURLE_OUT_OF_MEMORY;
 
-  resp = zalloc_zero(typeof(*resp), 1);
+  resp = zalloc(typeof(*resp), 1);
   if(!resp)
     goto out;
 

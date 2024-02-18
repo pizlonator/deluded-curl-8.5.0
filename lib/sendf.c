@@ -678,7 +678,7 @@ CURLcode Curl_cwriter_create(struct Curl_cwriter **pwriter,
   CURLcode result = CURLE_OUT_OF_MEMORY;
 
   DEBUGASSERT(zlength((char*)cwt->cwriter_prototype) >= sizeof(struct Curl_cwriter));
-  writer = (struct Curl_cwriter *) zalloc_clone_zero(cwt->cwriter_prototype);
+  writer = (struct Curl_cwriter *) zalloc_clone(cwt->cwriter_prototype);
   if(!writer)
     goto out;
 

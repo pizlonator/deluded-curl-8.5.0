@@ -1132,7 +1132,7 @@ static CURLcode socks_proxy_cf_connect(struct Curl_cfilter *cf,
     return result;
 
   if(!sx) {
-    sx = zalloc_zero(typeof(*sx), 1);
+    sx = zalloc(typeof(*sx), 1);
     if(!sx)
       return CURLE_OUT_OF_MEMORY;
     cf->ctx = sx;
