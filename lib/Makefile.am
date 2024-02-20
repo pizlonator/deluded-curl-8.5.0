@@ -91,7 +91,7 @@ libcurl_la_LDFLAGS_EXTRA += -Wl,--version-script=libcurl.vers
 else
 # if symbol-hiding is enabled, hide them!
 if DOING_CURL_SYMBOL_HIDING
-libcurl_la_LDFLAGS_EXTRA += -export-symbols-regex '^deluded_._curl_.*'
+libcurl_la_LDFLAGS_EXTRA += -export-symbols-regex '^pizlonated_._curl_.*'
 endif
 endif
 

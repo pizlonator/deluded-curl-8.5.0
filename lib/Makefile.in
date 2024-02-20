@@ -141,7 +141,7 @@ host_triplet = @host@
 @CURL_LT_SHLIB_USE_MIMPURE_TEXT_TRUE@am__append_3 = -mimpure-text
 @CURL_LT_SHLIB_USE_VERSIONED_SYMBOLS_TRUE@am__append_4 = -Wl,--version-script=libcurl.vers
 # if symbol-hiding is enabled, hide them!
-@CURL_LT_SHLIB_USE_VERSIONED_SYMBOLS_FALSE@@DOING_CURL_SYMBOL_HIDING_TRUE@am__append_5 = -export-symbols-regex '^deluded_._curl_.*'
+@CURL_LT_SHLIB_USE_VERSIONED_SYMBOLS_FALSE@@DOING_CURL_SYMBOL_HIDING_TRUE@am__append_5 = -export-symbols-regex '^pizlonated_._curl_.*'
 @USE_CPPFLAG_CURL_STATICLIB_TRUE@am__append_6 = -DCURL_STATICLIB
 @HAVE_WINDRES_TRUE@@USE_CPPFLAG_CURL_STATICLIB_FALSE@am__append_7 = $(LIB_RCFILES)
 @DOING_CURL_SYMBOL_HIDING_TRUE@am__append_8 = -DCURL_HIDDEN_SYMBOLS
