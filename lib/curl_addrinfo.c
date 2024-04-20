@@ -145,7 +145,7 @@ Curl_getaddrinfo_ex(const char *nodename,
     if((size_t)ai->ai_addrlen < ss_size)
       continue;
 
-    ca = zalloc_flex_cat(struct Curl_addrinfo, char, ss_size + namelen);
+    ca = malloc(sizeof(struct Curl_addrinfo) + ss_size + namelen);
     if(!ca) {
       error = EAI_MEMORY;
       break;
@@ -385,7 +385,7 @@ Curl_ip2addr(int af, const void *inaddr, const char *hostname, int port)
 
   DEBUGASSERT(inaddr && hostname);
 
-  buf = zalloc(struct namebuff, 1);
+  buf = malloc(sizeof(struct namebuff));
   if(!buf)
     return NULL;
 

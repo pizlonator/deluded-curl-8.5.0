@@ -791,7 +791,7 @@ mbed_connect_step2(struct Curl_cfilter *cf, struct Curl_easy *data)
       return CURLE_SSL_PINNEDPUBKEYNOTMATCH;
     }
 
-    p = zalloc(typeof(*p), 1);
+    p = calloc(1, sizeof(*p));
 
     if(!p)
       return CURLE_OUT_OF_MEMORY;
@@ -879,7 +879,7 @@ mbed_connect_step3(struct Curl_cfilter *cf, struct Curl_easy *data)
     void *old_ssl_sessionid = NULL;
     bool added = FALSE;
 
-    our_ssl_sessionid = zalloc(mbedtls_ssl_session, 1);
+    our_ssl_sessionid = malloc(sizeof(mbedtls_ssl_session));
     if(!our_ssl_sessionid)
       return CURLE_OUT_OF_MEMORY;
 

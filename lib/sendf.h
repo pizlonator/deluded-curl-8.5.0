@@ -108,9 +108,7 @@ struct Curl_cwtype {
                        const char *buf, size_t nbytes);
   void (*do_close)(struct Curl_easy *data,
                    struct Curl_cwriter *writer);
-  const void* cwriter_prototype;  /* points to an object allocated with the right Curl_cwriter type and
-                                     size. this is a hack to work around the fact that we can't put
-                                     ztypeof() in static const initializers, yet. */
+  size_t cwriter_size;  /* sizeof() allocated struct Curl_cwriter */
 };
 
 /* Client writer instance */

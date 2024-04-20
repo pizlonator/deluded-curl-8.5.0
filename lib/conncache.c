@@ -48,7 +48,7 @@
 static CURLcode bundle_create(struct connectbundle **bundlep)
 {
   DEBUGASSERT(*bundlep == NULL);
-  *bundlep = zalloc(struct connectbundle, 1);
+  *bundlep = malloc(sizeof(struct connectbundle));
   if(!*bundlep)
     return CURLE_OUT_OF_MEMORY;
 

@@ -3373,7 +3373,7 @@ static void set_cached_x509_store(struct Curl_cfilter *cf,
     return;
 
   if(!multi->ssl_backend_data) {
-    multi->ssl_backend_data = zalloc(struct multi_ssl_backend_data, 1);
+    multi->ssl_backend_data = calloc(1, sizeof(struct multi_ssl_backend_data));
     if(!multi->ssl_backend_data)
       return;
   }
@@ -4887,8 +4887,6 @@ static void ossl_free_multi_ssl_backend_data(
 #endif /* HAVE_SSL_X509_STORE_SHARE */
 }
 
-static const struct ossl_ssl_backend_data ossl_ssl_backend_data_prototype;
-
 const struct Curl_ssl Curl_ssl_openssl = {
   { CURLSSLBACKEND_OPENSSL, "openssl" }, /* info */
 
@@ -4902,7 +4900,7 @@ const struct Curl_ssl Curl_ssl_openssl = {
 #endif
   SSLSUPP_HTTPS_PROXY,
 
-  &ossl_ssl_backend_data_prototype,
+  sizeof(struct ossl_ssl_backend_data),
 
   ossl_init,                /* init */
   ossl_cleanup,             /* cleanup */

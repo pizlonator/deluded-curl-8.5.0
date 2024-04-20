@@ -283,7 +283,7 @@ static struct Curl_sh_entry *sh_addentry(struct Curl_hash *sh,
   }
 
   /* not present, add it */
-  check = zalloc(struct Curl_sh_entry, 1);
+  check = calloc(1, sizeof(struct Curl_sh_entry));
   if(!check)
     return NULL; /* major failure */
 
@@ -377,7 +377,7 @@ struct Curl_multi *Curl_multi_handle(int hashsize, /* socket hash */
                                      int chashsize, /* connection hash */
                                      int dnssize) /* dns hash */
 {
-  struct Curl_multi *multi = zalloc(struct Curl_multi, 1);
+  struct Curl_multi *multi = calloc(1, sizeof(struct Curl_multi));
 
   if(!multi)
     return NULL;
@@ -1200,7 +1200,7 @@ static CURLMcode multi_wait(struct Curl_multi *multi,
        big, so at 2^29 sockets this value might wrap. When a process gets
        the capability to actually handle over 500 million sockets this
        calculation needs a integer overflow check. */
-    ufds = zalloc(struct pollfd, nfds);
+    ufds = malloc(nfds * sizeof(struct pollfd));
     if(!ufds)
       return CURLM_OUT_OF_MEMORY;
     ufds_malloc = TRUE;

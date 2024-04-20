@@ -99,7 +99,7 @@ static CURLcode create_node(void)
   if(!data_key)
     return CURLE_OUT_OF_MEMORY;
 
-  data_node = zalloc(struct Curl_dns_entry, 1);
+  data_node = calloc(1, sizeof(struct Curl_dns_entry));
   if(!data_node)
     return CURLE_OUT_OF_MEMORY;
 

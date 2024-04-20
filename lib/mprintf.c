@@ -150,7 +150,7 @@ struct va_stack {
   int flags;
   long width;     /* width OR width parameter number */
   long precision; /* precision OR precision parameter number */
-  struct {
+  union {
     char *str;
     void *ptr;
     union {

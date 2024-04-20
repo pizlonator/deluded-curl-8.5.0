@@ -458,12 +458,12 @@ static struct ssl_connect_data *cf_ctx_new(struct Curl_easy *data,
   struct ssl_connect_data *ctx;
 
   (void)data;
-  ctx = zalloc(typeof(*ctx), 1);
+  ctx = calloc(1, sizeof(*ctx));
   if(!ctx)
     return NULL;
 
   ctx->alpn = alpn;
-  ctx->backend = zalloc_like(Curl_ssl->ssl_backend_data_prototype);
+  ctx->backend = calloc(1, Curl_ssl->sizeof_ssl_backend_data);
   if(!ctx->backend) {
     free(ctx);
     return NULL;
@@ -814,7 +814,7 @@ CURLcode Curl_ssl_initsessions(struct Curl_easy *data, size_t amount)
     /* this is just a precaution to prevent multiple inits */
     return CURLE_OK;
 
-  session = zalloc(struct Curl_ssl_session, amount);
+  session = calloc(amount, sizeof(struct Curl_ssl_session));
   if(!session)
     return CURLE_OUT_OF_MEMORY;
 
@@ -1311,7 +1311,7 @@ static ssize_t multissl_send_plain(struct Curl_cfilter *cf,
 static const struct Curl_ssl Curl_ssl_multi = {
   { CURLSSLBACKEND_NONE, "multi" },  /* info */
   0, /* supports nothing */
-  NULL, /* can't be allocated (zalloc_with_type will deluge panic) */
+  (size_t)-1, /* something insanely large to be on the safe side */
 
   multissl_init,                     /* init */
   Curl_none_cleanup,                 /* cleanup */

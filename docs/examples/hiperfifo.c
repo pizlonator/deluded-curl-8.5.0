@@ -268,7 +268,7 @@ static void setsock(SockInfo *f, curl_socket_t s, CURL *e, int act,
 /* Initialize a new SockInfo structure */
 static void addsock(curl_socket_t s, CURL *easy, int action, GlobalInfo *g)
 {
-  SockInfo *fdp = zalloc(typeof(SockInfo), 1);
+  SockInfo *fdp = calloc(1, sizeof(SockInfo));
 
   fdp->global = g;
   setsock(fdp, s, easy, action, g);
@@ -333,7 +333,7 @@ static void new_conn(char *url, GlobalInfo *g)
   ConnInfo *conn;
   CURLMcode rc;
 
-  conn = zalloc(typeof(ConnInfo), 1);
+  conn = calloc(1, sizeof(ConnInfo));
   conn->error[0]='\0';
 
   conn->easy = curl_easy_init();

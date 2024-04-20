@@ -169,7 +169,7 @@ static CURLcode h3_data_setup(struct Curl_cfilter *cf,
   if(stream)
     return CURLE_OK;
 
-  stream = zalloc(typeof(*stream), 1);
+  stream = calloc(1, sizeof(*stream));
   if(!stream)
     return CURLE_OUT_OF_MEMORY;
 
@@ -1052,7 +1052,7 @@ CURLcode Curl_cf_msh3_create(struct Curl_cfilter **pcf,
   (void)data;
   (void)conn;
   (void)ai; /* TODO: msh3 resolves itself? */
-  ctx = zalloc(typeof(*ctx), 1);
+  ctx = calloc(1, sizeof(*ctx));
   if(!ctx) {
     result = CURLE_OUT_OF_MEMORY;
     goto out;

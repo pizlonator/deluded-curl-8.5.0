@@ -106,7 +106,7 @@ static CURLcode mqtt_setup_conn(struct Curl_easy *data,
   (void)conn;
   DEBUGASSERT(data->req.p.mqtt == NULL);
 
-  mq = zalloc(struct MQTT, 1);
+  mq = calloc(1, sizeof(struct MQTT));
   if(!mq)
     return CURLE_OUT_OF_MEMORY;
   Curl_dyn_init(&mq->recvbuf, DYN_MQTT_RECV);

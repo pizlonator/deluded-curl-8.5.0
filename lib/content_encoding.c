@@ -284,6 +284,8 @@ static CURLcode deflate_do_init(struct Curl_easy *data,
   z_stream *z = &zp->z;     /* zlib state structure */
 
   /* Initialize zlib */
+  z->zalloc = (alloc_func) zalloc_cb;
+  z->zfree = (free_func) zfree_cb;
 
   if(inflateInit(z) != Z_OK)
     return process_zlib_error(data, z);
@@ -321,15 +323,13 @@ static void deflate_do_close(struct Curl_easy *data,
   exit_zlib(data, z, &zp->zlib_init, CURLE_OK);
 }
 
-static const struct zlib_writer zlib_writer_prototype;
-
 static const struct Curl_cwtype deflate_encoding = {
   "deflate",
   NULL,
   deflate_do_init,
   deflate_do_write,
   deflate_do_close,
-  &zlib_writer_prototype
+  sizeof(struct zlib_writer)
 };
 
 
@@ -341,6 +341,8 @@ static CURLcode gzip_do_init(struct Curl_easy *data,
   z_stream *z = &zp->z;     /* zlib state structure */
 
   /* Initialize zlib */
+  z->zalloc = (alloc_func) zalloc_cb;
+  z->zfree = (free_func) zfree_cb;
 
   if(strcmp(zlibVersion(), "1.2.0.4") >= 0) {
     /* zlib ver. >= 1.2.0.4 supports transparent gzip decompressing */
@@ -591,7 +593,7 @@ static const struct Curl_cwtype gzip_encoding = {
   gzip_do_init,
   gzip_do_write,
   gzip_do_close,
-  &zlib_writer_prototype
+  sizeof(struct zlib_writer)
 };
 
 #endif /* HAVE_LIBZ */
@@ -716,15 +718,13 @@ static void brotli_do_close(struct Curl_easy *data,
   }
 }
 
-static const struct brotli_writer brotli_writer_prototype;
-
 static const struct Curl_cwtype brotli_encoding = {
   "br",
   NULL,
   brotli_do_init,
   brotli_do_write,
   brotli_do_close,
-  &brotli_writer_prototype
+  sizeof(struct brotli_writer)
 };
 #endif
 
@@ -810,19 +810,16 @@ static void zstd_do_close(struct Curl_easy *data,
   }
 }
 
-static const struct zstd_writer zstd_writer_prototype;
-
 static const struct Curl_cwtype zstd_encoding = {
   "zstd",
   NULL,
   zstd_do_init,
   zstd_do_write,
   zstd_do_close,
-  &zstd_writer_prototype
+  sizeof(struct zstd_writer)
 };
 #endif
 
-static const struct Curl_cwriter cw_prototype;
 
 /* Identity handler. */
 static const struct Curl_cwtype identity_encoding = {
@@ -831,7 +828,7 @@ static const struct Curl_cwtype identity_encoding = {
   Curl_cwriter_def_init,
   Curl_cwriter_def_write,
   Curl_cwriter_def_close,
-  &cw_prototype
+  sizeof(struct Curl_cwriter)
 };
 
 
@@ -930,7 +927,7 @@ static const struct Curl_cwtype error_writer = {
   error_do_init,
   error_do_write,
   error_do_close,
-  &cw_prototype
+  sizeof(struct Curl_cwriter)
 };
 
 /* Find the content encoding by name. */

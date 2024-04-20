@@ -42,14 +42,12 @@ struct URLPattern {
       int ptr_s;
     } Set;
     struct {
-      void *ignored;
       char min_c;
       char max_c;
       char ptr_c;
       int step;
     } CharRange;
     struct {
-      void *ignored;
       curl_off_t min_n;
       curl_off_t max_n;
       int padlength;

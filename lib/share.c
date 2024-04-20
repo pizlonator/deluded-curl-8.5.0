@@ -39,7 +39,7 @@
 struct Curl_share *
 curl_share_init(void)
 {
-  struct Curl_share *share = zalloc(struct Curl_share, 1);
+  struct Curl_share *share = calloc(1, sizeof(struct Curl_share));
   if(share) {
     share->magic = CURL_GOOD_SHARE;
     share->specifier |= (1<<CURL_LOCK_DATA_SHARE);
@@ -107,7 +107,8 @@ curl_share_setopt(struct Curl_share *share, CURLSHoption option, ...)
 #ifdef USE_SSL
       if(!share->sslsession) {
         share->max_ssl_sessions = 8;
-        share->sslsession = zalloc(struct Curl_ssl_session, share->max_ssl_sessions);
+        share->sslsession = calloc(share->max_ssl_sessions,
+                                   sizeof(struct Curl_ssl_session));
         share->sessionage = 0;
         if(!share->sslsession)
           res = CURLSHE_NOMEM;

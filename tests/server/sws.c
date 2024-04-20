@@ -2126,7 +2126,7 @@ int main(int argc, char *argv[])
 
   install_signal_handlers(false);
 
-  req = zalloc(typeof(*req), 1);
+  req = calloc(1, sizeof(*req));
   if(!req)
     goto sws_cleanup;
 

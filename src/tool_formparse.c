@@ -42,7 +42,7 @@
 static struct tool_mime *tool_mime_new(struct tool_mime *parent,
                                        toolmimekind kind)
 {
-  struct tool_mime *m = (struct tool_mime *) zalloc(typeof(*m), 1);
+  struct tool_mime *m = (struct tool_mime *) calloc(1, sizeof(*m));
 
   if(m) {
     m->kind = kind;

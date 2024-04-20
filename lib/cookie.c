@@ -505,7 +505,7 @@ Curl_cookie_add(struct Curl_easy *data,
     return NULL;
 
   /* First, alloc and init a new struct for it */
-  co = zalloc(struct Cookie, 1);
+  co = calloc(1, sizeof(struct Cookie));
   if(!co)
     return NULL; /* bail out if we're this low on memory */
 
@@ -1212,7 +1212,7 @@ struct CookieInfo *Curl_cookie_init(struct Curl_easy *data,
 
   if(!inc) {
     /* we didn't get a struct, create one */
-    c = zalloc(struct CookieInfo, 1);
+    c = calloc(1, sizeof(struct CookieInfo));
     if(!c)
       return NULL; /* failed to get memory */
     /*
@@ -1353,7 +1353,7 @@ static int cookie_sort_ct(const void *p1, const void *p2)
 
 static struct Cookie *dup_cookie(struct Cookie *src)
 {
-  struct Cookie *d = zalloc(struct Cookie, 1);
+  struct Cookie *d = calloc(1, sizeof(struct Cookie));
   if(d) {
     CLONE(domain);
     CLONE(path);

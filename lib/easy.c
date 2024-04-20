@@ -503,7 +503,7 @@ static int events_socket(struct Curl_easy *easy,      /* easy handle */
                  __func__, s); */
     }
     else {
-      m = zalloc(struct socketmonitor, 1);
+      m = malloc(sizeof(struct socketmonitor));
       if(m) {
         m->next = ev->list;
         m->socket.fd = s;
@@ -887,7 +887,7 @@ static CURLcode dupset(struct Curl_easy *dst, struct Curl_easy *src)
  */
 struct Curl_easy *curl_easy_duphandle(struct Curl_easy *data)
 {
-  struct Curl_easy *outcurl = zalloc(struct Curl_easy, 1);
+  struct Curl_easy *outcurl = calloc(1, sizeof(struct Curl_easy));
   if(!outcurl)
     goto fail;
 

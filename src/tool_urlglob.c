@@ -45,7 +45,7 @@ static CURLcode glob_fixed(struct URLGlob *glob, char *fixed, size_t len)
   pat->content.Set.ptr_s = 0;
   pat->globindex = -1;
 
-  pat->content.Set.elements = zalloc(char *, 1);
+  pat->content.Set.elements = malloc(sizeof(char *));
 
   if(!pat->content.Set.elements)
     return GLOBERROR("out of memory", 0, CURLE_OUT_OF_MEMORY);
@@ -132,15 +132,16 @@ static CURLcode glob_set(struct URLGlob *glob, char **patternp,
 
       *buf = '\0';
       if(pat->content.Set.elements) {
-        char **new_arr = zrealloc(pat->content.Set.elements, char *,
-                                  (size_t)(pat->content.Set.size + 1));
+        char **new_arr = realloc(pat->content.Set.elements,
+                                 (size_t)(pat->content.Set.size + 1) *
+                                 sizeof(char *));
         if(!new_arr)
           return GLOBERROR("out of memory", 0, CURLE_OUT_OF_MEMORY);
 
         pat->content.Set.elements = new_arr;
       }
       else
-        pat->content.Set.elements = zalloc(char *, 1);
+        pat->content.Set.elements = malloc(sizeof(char *));
 
       if(!pat->content.Set.elements)
         return GLOBERROR("out of memory", 0, CURLE_OUT_OF_MEMORY);
@@ -466,7 +467,7 @@ CURLcode glob_url(struct URLGlob **glob, char *url, curl_off_t *urlnum,
     return CURLE_OUT_OF_MEMORY;
   glob_buffer[0] = 0;
 
-  glob_expand = zalloc(struct URLGlob, 1);
+  glob_expand = calloc(1, sizeof(struct URLGlob));
   if(!glob_expand) {
     Curl_safefree(glob_buffer);
     return CURLE_OUT_OF_MEMORY;
